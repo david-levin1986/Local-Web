@@ -13,11 +13,10 @@ pipeline {
                 sh '''
                     echo "Connecting to server $SERVIP"
                         ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
-                        echo "Choko Poko" > /tmp/remotserver.txt
+                        echo "Chipopo form munki start" > /tmp/remotserver.txt
                         cat /tmp/remotserver.txt
                         echo "Doing another action on the remote server"
                         ls -l /tmp/remotserver.txt
-                        EOF
                 '''
             }
         }
