@@ -6,7 +6,7 @@ pipeline {
                 REMOTE_USER = 'jenkinsusr'
                 REMOTE_HOST = '192.168.50.125'
                 WEB_SERVICE = 'motivation'
-                WEB_TEST = 'Your problem'
+                WEB_TEST = "Your problem"
                 
             }
 
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Start Testing Website $WEB_SERVICE"
-                curl -s $REMOTE_HOST | grep "Your problem" || { echo "Error The Index Not Fund in the WebSite"; exit 1; }
+                curl -s $REMOTE_HOST | grep $WEB_TEST || { echo "Error The Index Not Fund in the WebSite"; exit 1; }
                 '''
             }
         }
