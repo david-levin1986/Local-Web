@@ -9,7 +9,8 @@ pipeline {
             }
 
     stages {
-        stage('Test Remote Connection') {
+        /*
+        stage('Test remot server') {
 
                
             steps {
@@ -20,6 +21,17 @@ pipeline {
                         cat /tmp/remotserver.txt
                         echo "Doing another action on the remote server"
                         ls -l /tmp/remotserver.txt
+                '''
+            }
+        }
+        */
+        stage('Testin If Exist Web Service') {
+            stage {
+                sh '''
+                    scp -i $SSH_KEY scripts/setup_apache.sh $REMOTE_USER@$SERVIP:/tmp/InstallWebService.sh
+                    ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
+                    chmode +x /tmp/InstallWebService.sh
+                    ssh -i $SSH_KEY $REMOTE_USER@$SERVIP 'bash /tmp/InstallWebService.sh'
                 '''
             }
         }
