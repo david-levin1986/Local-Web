@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy Web') {
             steps {
                 sh '''
-                    echo "$WEB_SERVICE" >> $WEB_SERVICE.txt
+                    echo "$WEB_SERVICE" >> /tmp/$WEB_SERVICE.txt
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     sudo cp -r /tmp/$WEB_SERVICE/* /var/www/html/
 
