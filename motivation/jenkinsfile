@@ -6,12 +6,13 @@ pipeline {
 
             environment {
                 SERVIP = '192.168.50.125'
+                SRV_COONECT = "ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@192.168.50.125 << 'ENDSSH'"
             }   
             steps {
                 sh '''
                     echo "Connecting to server $SERVIP"
-                    ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@$SERVIP << 'ENDSSH'
-                        echo "pop" > /tmp/remotserver.txt
+                        $SRV_COONECT
+                        echo "Choko Poko" > /tmp/remotserver.txt
                         cat /tmp/remotserver.txt
                         echo "Doing another action on the remote server"
                         ls -l /tmp/remotserver.txt
