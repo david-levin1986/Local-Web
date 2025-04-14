@@ -5,6 +5,7 @@ pipeline {
                 SSH_KEY = '/var/jenkins_home/.ssh/id_rsa'
                 REMOTE_USER = 'jenkinsusr'
                 REMOTE_HOST = '192.168.50.125'
+                WEB_SERVICE = 'motivation'
                 
                 
             }
@@ -31,7 +32,7 @@ pipeline {
                 sh '''
                     
                     scp -i $SSH_KEY InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
-                    scp -r -i $SSH_KEY motivation $REMOTE_USER@$REMOTE_HOST:/tmp/
+                    scp -r -i $SSH_KEY $WEB_SERVICE $REMOTE_USER@$REMOTE_HOST:/tmp/
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmod +x /tmp/InstallWebService.sh
                     /tmp/InstallWebService.sh                   
