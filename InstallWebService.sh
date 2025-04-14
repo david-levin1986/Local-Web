@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# check os famely
 if [ -f /etc/redhat-release ]; then
     echo "CentOS / RHEL detected"
     SERVICE_NAME="httpd"
@@ -13,10 +14,12 @@ else
     exit 1
 fi
 
-if systemctl status $SERVICE_NAME &>/dev/null; then
+# check if web service exist
+if sudo systemctl status $SERVICE_NAME &>/dev/null; then
     echo "$SERVICE_NAME is already installed. Checking status..."
 
-    if systemctl is-active --quiet $SERVICE_NAME; then
+    # check if web service is active
+    if sudo systemctl is-active --quiet $SERVICE_NAME; then
         echo "$SERVICE_NAME is already active"
     else
         echo "Starting $SERVICE_NAME..."
@@ -29,7 +32,8 @@ if systemctl status $SERVICE_NAME &>/dev/null; then
         fi
     fi
 
-    if systemctl is-enabled --quiet $SERVICE_NAME; then
+    # check if web service enabled
+    if sudo systemctl is-enabled --quiet $SERVICE_NAME; then
         echo "$SERVICE_NAME is already enabled"
     else
         echo "Enabling $SERVICE_NAME..."
@@ -43,12 +47,13 @@ if systemctl status $SERVICE_NAME &>/dev/null; then
     fi
 
 else
-    
+    # install web service if nesesery
     echo "$SERVICE_NAME is NOT installed. Installing..."
     $INSTALL_CMD
     if [ $? -eq 0 ]; then
         echo "$SERVICE_NAME installed successfully"
-       
+
+        # make shure the web service is anble and active
         echo "Starting $SERVICE_NAME..."
         sudo systemctl start $SERVICE_NAME
         if [ $? -eq 0 ]; then
