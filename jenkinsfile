@@ -6,6 +6,7 @@ pipeline {
                 REMOTE_USER = 'jenkinsusr'
                 REMOTE_HOST = '192.168.50.125'
                 
+                
             }
 
     stages {
