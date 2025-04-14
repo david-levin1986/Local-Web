@@ -2,9 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Test Remote Connection') {
+
+            environment {
+                SERVIP = '192.168.50.125'
+                REMOTE_CONECT = 'ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@192.168.50.125'
+            }   
             steps {
-                echo 'Hello World'
+                sh '''
+                    echo "Connecting to server $SERVIP"
+                '''
             }
         }
     }
