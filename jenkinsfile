@@ -44,8 +44,8 @@ pipeline {
                 sh '''
                     echo "$WEB_SERVICE"
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
-                    sudo cp -r /tmp/$WEB_SERVICE/* /var/www/html/
-                    'EOF'
+                    sudo cp -r "/tmp/$WEB_SERVICE/*" /var/www/html/
+                    
                 '''
             }
         }
