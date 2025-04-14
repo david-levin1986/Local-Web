@@ -32,7 +32,7 @@ pipeline {
                 sh '''
                     
                     scp -i $SSH_KEY InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
-                    scp -r -i $SSH_KEY $WEB_SERVICE $REMOTE_USER@$REMOTE_HOST:/tmp/
+                    
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmod +x /tmp/InstallWebService.sh
                     /tmp/InstallWebService.sh                   
@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy Web') {
             steps {
                 sh '''
-                    echo "$WEB_SERVICE"
+                    scp -r -i $SSH_KEY $WEB_SERVICE $REMOTE_USER@$REMOTE_HOST:/tmp/
                     ssh -i \$SSH_KEY \$REMOTE_USER@\$REMOTE_HOST \\
                     sudo rm -rf /var/www/html/*
                     sudo cp -r /tmp/$WEB_SERVICE/* /var/www/html/
