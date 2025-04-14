@@ -45,9 +45,8 @@ pipeline {
                     scp -r -i $SSH_KEY $WEB_SERVICE $REMOTE_USER@$REMOTE_HOST:/tmp/
                     ssh -i \$SSH_KEY \$REMOTE_USER@\$REMOTE_HOST \\
                     sudo rm -rf /var/www/html/*
-                    sudo cp -r /tmp/$WEB_SERVICE/* /var/www/html/
-                    
-                    
+                    "sudo cp -r /tmp/\$WEB_SERVICE/* /var/www/html/"
+ 
                 '''
             }
         }
