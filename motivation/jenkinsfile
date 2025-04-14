@@ -28,7 +28,7 @@ pipeline {
         stage('Testin If Exist Web Service') {
             steps {
                 sh '''
-                    scp -i $SSH_KEY motivation/InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
+                    scp -i $SSH_KEY "/var/jenkins_home/workspace/Build Web/Workspace/motivation/InstallWebService.sh" $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmode +x /tmp/InstallWebService.sh
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST 'bash /tmp/InstallWebService.sh'
