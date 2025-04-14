@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Start Testing Website $WEB_SERVICE"
-                curl -s $REMOTE_HOST | grep \$WEB_TEST || { echo "Error The Index Not Fund in the WebSite"; exit 1; }
+                curl -s $REMOTE_HOST | grep 'Your problem' || { echo "Error The Index Not Fund in the WebSite"; exit 1; }
                 '''
             }
         }
