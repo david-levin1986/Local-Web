@@ -12,8 +12,8 @@ pipeline {
                 sh '''
                     echo "Connecting to server $SERVIP"
                     $REMOTE_CONECT
-                    'echo "testing connection from jenkins" > /tmp/testconnection.txt'
-                    cat /tmp/testconnection.txt
+                    'echo "test text" > /tmp/remotserver.txt'
+                    cat /tmp/remotserver.txt'
                     exit
                 '''
             }
