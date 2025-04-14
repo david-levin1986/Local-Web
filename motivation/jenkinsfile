@@ -34,7 +34,7 @@ pipeline {
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmod +x /tmp/InstallWebService.sh
                     /tmp/InstallWebService.sh
-                    cp -r /tmp/web/* /var/www/html/
+                    sudo cp -r /tmp/web/* /var/www/html/
                 '''
             }
         }
