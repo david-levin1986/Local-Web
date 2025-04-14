@@ -11,31 +11,14 @@ pipeline {
             }
 
     stages {
-        /*
-        stage('Test remot server') {
 
-               
-            steps {
-                sh '''
-                        echo "Connecting to server $SERVIP"
-                        ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
-                        echo "Chipopo he is the king" > /tmp/remotserver.txt
-                        cat /tmp/remotserver.txt
-                        echo "Doing another action on the remote server"
-                        ls -l /tmp/remotserver.txt
-                '''
-            }
-        }
-        */
         stage('Install Prerequest') {
             steps {
                 sh '''
-                    
-                    scp -i $SSH_KEY InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
-                    
+                    scp -i $SSH_KEY InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh             
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmod +x /tmp/InstallWebService.sh
-                    /tmp/InstallWebService.sh                   
+                    /tmp/InstallWebService.sh
                 '''
             }
         }
@@ -48,7 +31,15 @@ pipeline {
                     sudo cp -r /tmp/\$WEB_SERVICE/* /var/www/html/
                     sudo rm -rf /tmp/InstallWebService.sh
                     sudo rm -rf /tmp/\$WEB_SERVICE
- 
+
+                '''
+            }
+        }
+        stage('Test Website')  {
+            steps {
+                sh '''
+                echo "Start Testing Website $WEB_SERVICE"
+                curl -s $REMOTE_HOST | grep "Your problem" || { echo "Error The Index Not Fund in the WebSite"; exit 1; }
                 '''
             }
         }
