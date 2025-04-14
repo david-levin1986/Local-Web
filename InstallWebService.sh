@@ -10,7 +10,7 @@ elif [ -f /etc/debian_version ]; then
     SERVICE_NAME="apache2"
     INSTALL_UDATE="sudo apt update -y"
     INSTALL_WEB="sudo apt install apache2 -y"
-    INSTALL_UDATE
+    $INSTALL_UDATE
 else
     echo "Unsupported OS"
     exit 1
@@ -51,7 +51,7 @@ if sudo systemctl status $SERVICE_NAME &>/dev/null; then
 else
     # install web service if nesesery
     echo "$SERVICE_NAME is NOT installed. Installing..."
-    INSTALL_WEB
+    $INSTALL_WEB
     if [ $? -eq 0 ]; then
         echo "$SERVICE_NAME installed successfully"
 
