@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sh '''
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
-                    sudo cp -r /tmp/web/* /var/www/html/
+                    sudo cp -r /tmp/$WEB_SERVICE/* /var/www/html/
 
                 '''
             }
