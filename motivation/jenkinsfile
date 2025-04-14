@@ -11,6 +11,10 @@ pipeline {
             steps {
                 sh '''
                     echo "Connecting to server $SERVIP"
+                    $REMOTE_CONECT
+                    echo "testing connection from jenkins" > /tmp/testconnection.txt
+                    cat /tmp/testconnection.txt
+                    exit
                 '''
             }
         }
