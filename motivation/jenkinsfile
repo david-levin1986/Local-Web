@@ -29,8 +29,9 @@ pipeline {
             steps {
                 sh '''
                     ls -l
+                    ls -l /motivation
                     scp -i $SSH_KEY motivation/InstallWebService.sh $REMOTE_USER@$REMOTE_HOST:/tmp/InstallWebService.sh
-                    scp -r -i $SSH_KEY motivation/web/ $REMOTE_USER@$REMOTE_HOST:/tmp/
+                    scp -r -i $SSH_KEY /motivation/web/ $REMOTE_USER@$REMOTE_HOST:/tmp/
                     ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                     chmod +x /tmp/InstallWebService.sh
                     /tmp/InstallWebService.sh
