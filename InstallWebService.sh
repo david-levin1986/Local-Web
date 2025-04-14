@@ -9,7 +9,7 @@ elif [ -f /etc/debian_version ]; then
     echo "Ubuntu / Debian detected"
     SERVICE_NAME="apache2"
     INSTALL_UDATE="sudo apt update -y"
-    INSTALL_WEB="sudo apt install -y apache2"
+    INSTALL_WEB="sudo apt install apache2 -y"
     INSTALL_UDATE
 else
     echo "Unsupported OS"
