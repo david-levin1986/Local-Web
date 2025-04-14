@@ -46,6 +46,8 @@ pipeline {
                     ssh -i \$SSH_KEY \$REMOTE_USER@\$REMOTE_HOST <<EOF
                     sudo rm -rf /var/www/html/*
                     "sudo cp -r /tmp/\$WEB_SERVICE/* /var/www/html/"
+                    rm -rf tmp/InstallWebService.sh
+                    rm -rf /tmp/\$WEB_SERVICE
  
                 '''
             }
