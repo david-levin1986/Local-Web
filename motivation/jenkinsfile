@@ -6,12 +6,12 @@ pipeline {
 
             environment {
                 SERVIP = '192.168.50.125'
-                REMOTE_CONECT = 'ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@192.168.50.125'
+                REMOTE_CONECT = 
             }   
             steps {
                 sh '''
                     echo "Connecting to server $SERVIP"
-                    $REMOTE_CONECT
+                    "ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@$SERVIP"
                     'echo "test text" > /tmp/remotserver.txt'
                     cat /tmp/remotserver.txt'
                     exit
