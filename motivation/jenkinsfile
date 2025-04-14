@@ -6,7 +6,6 @@ pipeline {
 
             environment {
                 SERVIP = '192.168.50.125'
-                REMOTE_CONECT = 
             }   
             steps {
                 sh '''
