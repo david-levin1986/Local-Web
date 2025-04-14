@@ -5,18 +5,19 @@ pipeline {
         stage('Test Remote Connection') {
 
             environment {
-                SERVIP = '192.168.50.125'
-                SRV_COONECT = ssh -v -i /var/jenkins_home/.ssh/id_rsa jenkinsusr@192.168.50.125 << 'ENDSSH'
+                SSH_KEY = '/var/jenkins_home/.ssh/id_rsa'
+                REMOTE_USER = 'jenkinsusr'
+                REMOTE_HOST = '192.168.50.125'
             }   
             steps {
                 sh '''
                     echo "Connecting to server $SERVIP"
-                        $SRV_COONECT
+                        ssh -i $SSH_KEY $REMOTE_USER@$REMOTE_HOST <<'EOF'
                         echo "Choko Poko" > /tmp/remotserver.txt
                         cat /tmp/remotserver.txt
                         echo "Doing another action on the remote server"
                         ls -l /tmp/remotserver.txt
-                        exit
+                        EOF
                 '''
             }
         }
